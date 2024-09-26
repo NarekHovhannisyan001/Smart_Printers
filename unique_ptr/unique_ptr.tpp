@@ -1,6 +1,14 @@
 #ifndef Unique_ptr_TPP
 #define Unique_ptr_TPP
 
+
+template <typename T>
+constexpr Unique_ptr<T>::Unique_ptr() noexcept : m_ptr{nullptr} {}
+
+template <typename T>
+constexpr Unique_ptr<T>::Unique_ptr(std::nullptr_t ptr) noexcept : m_ptr(ptr) {}
+
+
 template <typename T>
 Unique_ptr<T>::Unique_ptr(T* ptr) noexcept : m_ptr(ptr) {}
 
@@ -46,6 +54,7 @@ void Unique_ptr<T>::reset(T* ptr) noexcept {
     T* old_ptr = m_ptr;
     m_ptr = ptr;
     delete old_ptr;
+    old_ptr = nullptr;
 }
 
 template <typename T>
@@ -58,5 +67,9 @@ T* Unique_ptr<T>::operator->() const noexcept {
     return m_ptr;
 }
 
+template <typename T>
+Unique_ptr<T>::operator bool() const noexcept{
+    return m_ptr;
+}
 
 #endif //Unique_ptr_TPP

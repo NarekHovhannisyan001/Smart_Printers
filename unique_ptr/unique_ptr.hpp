@@ -6,7 +6,9 @@
 template <typename T>
 class Unique_ptr {
 public:
-    explicit Unique_ptr(T* ptr = nullptr) noexcept;
+    constexpr Unique_ptr() noexcept;
+    constexpr Unique_ptr(std::nullptr_t) noexcept;
+    explicit Unique_ptr(T* ptr) noexcept;
     ~Unique_ptr();
 
     Unique_ptr(const Unique_ptr&) = delete;
@@ -23,9 +25,7 @@ public:
 
     T& operator*() const noexcept;
     T* operator->() const noexcept;
-    operator bool() {
-        return m_ptr;
-    }
+    explicit operator bool() const noexcept;
 
 private:
     T* m_ptr;
