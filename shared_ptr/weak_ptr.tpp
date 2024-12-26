@@ -32,8 +32,8 @@ Shared_ptr<T> Weak_ptr<T>::lock() const {
     if (expired()) {
             return Shared_ptr<T>((T*)nullptr);
         } else {
-            (control_block->use_count())++;
-            return Shared_ptr<T>((T*)control_block);
+            //(control_block->use_count())++;
+            return Shared_ptr<T>(control_block);
         }
 }
 
