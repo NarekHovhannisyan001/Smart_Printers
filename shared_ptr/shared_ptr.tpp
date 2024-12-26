@@ -83,7 +83,7 @@ T* Shared_ptr<T>::operator->() const {
 template <class T>
 void Shared_ptr<T>::swap(Shared_ptr& obj) {
     // std::swap(*(control_block->get()), *obj.control_block->get());
-    // std::swap(control_block->use_count(), obj.control_block->use_count());
+    std::swap(control_block->use_count(), obj.control_block->use_count());
     std::swap(control_block, obj.control_block);
 }
 
